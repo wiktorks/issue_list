@@ -9,8 +9,6 @@
 # The application checks (at startup or every 24h) whether the json file is consistent with the database, if not the file is updated
 # db should be tasks archive
 
-# Client OAuth id key: 886346785103-2kfm7nfbkcf7cmua2jgeac5c91i34mtk.apps.googleusercontent.com
-# Client OAuth secret: kuFhx2Vfq5LLiVkwp5qP9HRu
 
 from flask import Flask
 
