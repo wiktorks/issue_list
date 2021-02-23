@@ -12,8 +12,8 @@
 
 from flask import Flask
 
-from extensions import mongo
-from routes.routes import configure_routes
+from .extensions import mongo
+from .routes.routes import configure_routes
 
 def create_app():
     app = Flask(__name__)
