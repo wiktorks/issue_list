@@ -12,13 +12,13 @@
 
 from flask import Flask
 
-from extensions import mongo
-from routes.routes import configure_routes
+from .extensions import mongo
+from .routes.routes import configure_routes
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static', static_url_path='/static')
     app.secret_key = 'keyboard_cat'
-    # app.config['MONGODB_SETTINGS'] = "mongodb://localhost:27017/issueList"
+
     app.config['MONGODB_SETTINGS'] = {
         'db': 'issueList'
     }
