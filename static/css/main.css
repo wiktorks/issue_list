@@ -1,10 +1,23 @@
-  a {
-    color: #fff;
-    text-decoration: none;
-  } 
+:root {
+  --background: #F1F2EE;
+  --component: #BFB7B6;
+  --dark: #435058;
+  --darkred: #2D080A;
+  --red: #F71735;
+}
 
-  a:hover {
-    color: #fff;
-    text-decoration: none;
-  }
-  
+body {
+  background-color: var(--background);
+}
+
+#nav-main {
+  background-color: var(--dark);
+}
+
+#nav-main a {
+  color: #fff;
+}
+
+#nav-main #login-panel {
+  margin-left: auto;
+}

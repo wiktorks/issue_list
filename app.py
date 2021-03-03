@@ -12,7 +12,8 @@
 
 from flask import Flask
 
-from .extensions import mongo
+
+from .extensions import mongo, bcrypt, login_manager
 from .routes.routes import configure_routes
 
 def create_app():
@@ -23,6 +24,8 @@ def create_app():
         'db': 'issueList'
     }
     mongo.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
     configure_routes(app)
 
     return app

@@ -1,3 +1,6 @@
 __pycache__/
 .*.py
 .vscode/
+venv/
+*.code-workspace
+.directory
