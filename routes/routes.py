@@ -6,10 +6,10 @@ from ..utils.forms import LoginForm, RegisterForm
 from ..models.user import User
 from ..extensions import bcrypt, login_manager
 
+
 def configure_routes(app):
     @login_manager.user_loader
     def load_user(user_id):
-        # print(User.objects(pk=user_id).first().name)
         return User.objects(pk=user_id).first()
 
     @app.route('/')
@@ -30,7 +30,8 @@ def configure_routes(app):
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('index'))
             else:
-                flash('Invalid username or password. Please try again or register.', 'danger')
+                flash(
+                    'Invalid username or password. Please try again or register.', 'danger')
         return render_template('login.html', form=form)
 
     @app.route('/register', methods=['GET', 'POST'])
@@ -43,15 +44,18 @@ def configure_routes(app):
             # try:
             password = bcrypt.generate_password_hash(form.data['password'])
             name, email, user_type = form.data['username'], form.data['user_email'], 'local'
-            new_user = User(name=name, email=email, password=password, user_type=user_type)
+            new_user = User(name=name, email=email,
+                            password=password, user_type=user_type)
             new_user.save()
-            flash(message=f'Your account {form.username.data} has been created. You may now sign in.', category='success')
+            flash(
+                message=f'Your account {form.username.data} has been created. You may now sign in.', category='success')
             return redirect(url_for('login'))
             # except NotUniqueError:
             #     print(NotUniqueError.args.)
             #     flash(message=f'An error occured on the server side.', category='danger')
 
         return render_template('register.html', form=form)
+
     @app.route('/logout')
     def logout():
         logout_user()
