@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block head %}
+<title>{{ user.name }}'s account</title>
+{% endblock %} {% block body %}
+<section>
+  <article class="container text-center">
+    <header class="row justify-content-center">
+      <div class="col-sm-6">
+        <h1>{{ user.name }}'s account</h1>
+      </div>
+    </header>
+    <section class="row mt-5 justify-content-center">
+      <h2>My issues:</h2>
+      <ul class="col-sm-6">
+        {% for issue in issues %}
+          <li>{{ issue.title }}</li>
+        {% endfor %}
+      </div>
+    </section>
+  </article>
+</section>
+{% endblock %}

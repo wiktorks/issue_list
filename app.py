@@ -14,7 +14,7 @@ from flask import Flask
 
 
 from .extensions import mongo, bcrypt, login_manager
-from .routes.routes import configure_routes
+from .routes import configure_routes
 
 def create_app():
     app = Flask(__name__, static_folder='static', static_url_path='/static')
@@ -26,6 +26,9 @@ def create_app():
     mongo.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = 'login'
+    login_manager.login_message_category = 'info'
+
     configure_routes(app)
 
     return app
