@@ -19,6 +19,7 @@ class BaseDocument(Document):
     assigned_users = ListField(ReferenceField(
         User, reverse_delete_rule='CASCADE'), default=list)
     created_at = DateTimeField(required=True)
+    updated_at = DateTimeField(required=True)
 
     meta = {
         'allow_inheritance': True
@@ -27,8 +28,10 @@ class BaseDocument(Document):
 
 class Task(BaseDocument):
     description = StringField(max_length=500)
+    category = StringField(max_length=50)
 
 
 class Issue(BaseDocument):
     task_list = ListField(ReferenceField(Task))
     status = StringField(required=True)
+    priority = StringField(required=True)

@@ -46,3 +46,34 @@ class CreateIssue(FlaskForm):
     description = TextAreaField(
         'Description', validators=[DataRequired(), Length(min=5, max=300)])
     submit = SubmitField('Create')
+
+
+class AccountSettings(FlaskForm):
+    username = StringField('Username', validators=[
+                           DataRequired(), Length(min=5, max=30)])
+    user_email = EmailField('Email', validators=[
+                            DataRequired(), Length(min=5, max=30), Email()])
+    password = PasswordField('Password', validators=[
+                             DataRequired(), Length(max=30)])
+    confirm_password = PasswordField('Confirm Password', validators=[
+                                     DataRequired(), EqualTo('password')])
+    old_password = PasswordField('Password', validators=[
+        DataRequired(), Length(max=30)])
+
+    submit = SubmitField('Save changes')
+
+    def validate_username(self, username):
+        print(self.current_user.name)
+        if username != self.current_user.name:
+            user = User.objects(name=username.data).first()
+            if user:
+                raise ValidationError(
+                    message='Account with given username already exists. Try a different one.')
+
+    def validate_user_email(self, user_email):
+        print(self.current_user.email)
+        if user_email != self.current_user.email:
+            user = User.objects(name=user_email.data).first()
+            if user:
+                raise ValidationError(
+                    message='Account with given username already exists. Try a different one.')
